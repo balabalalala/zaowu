@@ -14,13 +14,15 @@
     <div class="mask" v-show='isShow'>
       <div class="click-buy">
         <div class="clothes">
-          <img src="@/assets/kind/cloth.png" class="buy-cloth" alt="sorry">
+          <div>
+            <img :src="'http://192.168.0.171/'+goods.img1" class="buy-cloth" alt="sorry">
+          </div>
           <div class="cloth-intro">
-            <img src="@/assets/home/close.png" @click="addShopping(goodsDetail)" class="close" alt="sorry">
-            <p class="ename">{{goodsDetail.board}}</p>
-            <p class="cname">女士吊带性感睡衣</p>
-            <p class="price">¥{{goodsDetail.price}}</p>
-            <p class="surplus">仅剩10件</p>
+            <img src="@/assets/home/close.png" @click="addShopping()" class="close" alt="sorry">
+            <p class="ename">{{goods.brandId}}</p>
+            <p class="cname">{{goods.name}}</p>
+            <p class="price">¥{{goods.priceOut}}</p>
+            <p class="surplus">仅剩{{goods.count}}件</p>
           </div>
         </div>
         <div class="clothes-detail">
@@ -30,8 +32,8 @@
               <img src="@/assets/home/arrow.png" alt="sorry" class="arrow">
             </div>
             <div class="balls">
-              <span class="com-ball white-ball"></span>
-              <span class="com-ball black-ball"></span>
+              <span class="com-ball white-ball" :style="{background:goods.color1}"></span>
+              <span class="com-ball black-ball" :style="{background:goods.color2}"></span>
             </div>
           </div>
           <div class="standard-detail">
@@ -56,7 +58,7 @@
               <span class="com-ball l-ball" @click="increase()">+</span>
             </div>
           </div>
-          <button class="confirm" @click="addShopping(goodsDetail)" v-if="confirm">确定</button>
+          <button class="confirm" @click="addShopping" v-if="confirm">确定</button>
           <router-link tag='button' to='/confirmOrder' class="confirm" v-else>确定</router-link>
         </div>
       </div>
@@ -66,11 +68,7 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
-  props: {
-    goodsDetail: {
-      type: Object
-    }
-  },
+  props:['goods'],
   data(){
     return{
       isShow:false,
@@ -99,12 +97,13 @@ export default {
       changeHeart(){
         this.heartActive = !this.heartActive;
       },
-      addShopping(goodsDetail){
+      addShopping(){
         this.isShow = false;
-        var goodsDetail2 = Object.assign({}, goodsDetail, { count: 1 },{value:false})
-        // console.log(goodsDetail2)
+        // 将需要传递的数据深拷贝，
+        var goodsDetail2 = Object.assign({}, this.goods, { count: 1 },{value:false})
         this.addList(goodsDetail2)
       },
+      // 将深拷贝的数据传到vuex，然后在页面中直接用vuex定义的数组
       ...mapMutations({
         addList: 'addList'
       })
@@ -113,8 +112,6 @@ export default {
 </script>
 <style scoped lang='styl'>
 .underwear-nav{
-  /*width: 100%;
-  height: 100%;*/
   .bottom-nav{
 			position: fixed;
 			left: 0;
@@ -193,6 +190,8 @@ export default {
           position: absolute;
           left: 0;
           top: 0;
+          width: 114px;
+          height: 114px;
         }
         .cloth-intro{
           position: absolute;

@@ -2,16 +2,16 @@
     <div class="banner">
         <swiper :options="swiperOption" ref="mySwiper" class='sw'>
             <!-- slides -->
-            <swiper-slide><img src="@/assets/kind/wares1.png" alt="sorry"></swiper-slide>
-            <swiper-slide><img src="@/assets/kind/wares2.png" alt="sorry"></swiper-slide>
-            <swiper-slide><img src="@/assets/kind/wares3.png" alt="sorry"></swiper-slide>
-            <!-- Optional controls -->
+            <swiper-slide class="bannerImg"  v-for="(item,index) of imglist"  :key='index'>
+                <img :src="'http://192.168.0.171/'+item" alt="sorry">
+            </swiper-slide>
         </swiper>
             <div class="swiper-pagination" slot="pagination"></div>
     </div>
 </template>
 <script>
 export default {
+    props:['imglist'],
     data() {
         return {
             swiperOption: {//swiper3
@@ -38,8 +38,6 @@ export default {
   background:#1c4b47;
 }
 .banner {
-    /* position: absolute; */
-    /* left: 0; */
     position: relative;
     margin-top: 56px;
     width: 375px;
@@ -47,6 +45,14 @@ export default {
     .sw{
         height: 100%;
         padding: 0 50px;
+        .bannerImg{
+            width: 275px;
+            margin-right: 43px;
+            img{
+                width: 275px;
+                height: 383px;
+            }
+        }
     }
     .swiper-pagination{
         margin-left: 141px;

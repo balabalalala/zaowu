@@ -1,6 +1,7 @@
 <template>
     <div class="detail-content">
         <div class="container">
+        
             <ul class="sort">
                 <li class="sort-item">
                     <span>无痕</span>
@@ -16,77 +17,27 @@
                 </li>
             </ul>
             <ul class="content-list">
-                <router-link tag='li' class="group" v-for="(item,index) of list" :key='item.id' :to="/kind/+$route.params.id+'/'+item.id">
-                    <img :src="item.img" alt="sorry" class="group-img">
-                    <p class="etitle">{{item.board}}</p>
-                    <p class="ctitle">{{item.desc}}</p>
-                    <p class="price">¥{{item.price}}</p>
+                <router-link tag='li' class="group" v-for="item of mykindlist" :key='item.goods.id' :to="/kind/+$route.params.id+'/'+item.goods.id">
+                    <img :src="'http://192.168.0.171/'+item.goods.img1" alt="sorry" class="group-img">
+                    <p class="etitle">{{item.goods.brandId}}</p>
+                    <p class="ctitle">{{item.goods.name}}</p>
+                    <p class="price">¥{{item.goods.priceOut}}</p>
                 </router-link>
             </ul>
         </div>
     </div>
 </template>
 <script>
-import product1 from "@/assets/kind/detail1.png"
-import product2 from "@/assets/kind/detail2.png"
-import product3 from "@/assets/kind/detail3.png"
-import product4 from "@/assets/kind/detail4.png"
-import product5 from "@/assets/kind/detail5.png"
-import product6 from "@/assets/kind/detail6.png"
 export default{
-    props:{
-        list:{
-            type:Array,
-        }
-    },
+    props:["list","mykindlist",'test'],
     data(){
         return{
-            // product:[
-            //     {
-            //         id:'41',
-            //         url:product1,
-            //         etitle:'NEIWAI',
-            //         ctitle:'Cozy女士家居服莫代尔',
-            //         price:'¥399'
-            //     },
-            //     {
-            //         id:'42',
-            //         url:product2,
-            //         etitle:'TRIUMPU',
-            //         ctitle:'文胸内裤套装',
-            //         price:'¥299'
-            //     },
-            //     {
-            //         id:'43',
-            //         url:product3,
-            //         etitle:'ESSENCE',
-            //         ctitle:'女士Cozy圆领吊带性感',
-            //         price:'¥219'
-            //     },
-            //     {
-            //         id:'44',
-            //         url:product4,
-            //         etitle:'LAPERLA',
-            //         ctitle:'女士Bra-top蕾丝美背无',
-            //         price:'¥159'
-            //     },
-            //     {
-            //         id:'45',
-            //         url:product5,
-            //         etitle:'CRYSTALS',
-            //         ctitle:'零敏洛丽无钢圈内衣',
-            //         price:'¥299'
-            //     },
-            //     {
-            //         id:'46',
-            //         url:product6,
-            //         etitle:'JUDYHUA',
-            //         ctitle:'女士高端网纱交叠无钢',
-            //         price:'¥249'
-            //     },
-            // ]
+           
         }
-    }
+    },
+    created(){
+       
+    },
 }
 </script>
 <style scoped lang='styl'>
@@ -145,10 +96,13 @@ export default{
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
-                .price{
-                    font-weight:bold;
-                    color: #010E0D;
-                }
+            }
+            .etitle{
+                margin-top: 5px;
+            }
+            .price{
+                font-weight:bold;
+                color: #010E0D;
             }
         }
     }

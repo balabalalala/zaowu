@@ -16,13 +16,13 @@
                     <span class="circle">
                         <input class="circle" type="checkbox" v-model="checkboxList" :value="item" >
                     </span>
-                    <img src="@/assets/home/1.png" alt="sorry" class="photo">
+                    <img :src="'http://192.168.0.171/'+item.img1" alt="sorry" class="photo">
                   </div>
                   <div class="word" >
-                      <p class="brand">{{item.board}}</p>
-                      <p class="cname">女士吊带性感睡衣</p>
+                      <p class="brand">{{item.brandId}}</p>
+                      <p class="cname">{{item.name}}</p>
                       <div class="money">
-                          <span class="price">¥{{item.price}}</span>
+                          <span class="price">¥{{item.priceOut}}</span>
                           <div class="balls">
                             <span class="com-ball" @click="lessCount(item)">-</span>
                             <span class="com-ball m-ball">{{item.count}}</span>
@@ -105,31 +105,13 @@ export default {
             var addPrice = 0 
             for(let i = 0 ; i < this.checkboxList.length ; i++){
                 if(this.checkboxList[i].count>0){
-                    addPrice +=  this.checkboxList[i].count * this.checkboxList[i].price
+                    addPrice +=  this.checkboxList[i].count * this.checkboxList[i].priceOut
                 }
             }
             return addPrice 
         }
     },
     methods:{
-        // changeAll(){
-        //     this.obj.map(o=>{
-        //         o.value = this.selectAll;
-        //         console.log(o.value)
-        //     })
-        // },
-        // change(v){
-        //     console.log('get==>'+v);
-        //     this.obj.map(i=>{
-        //         if(i.value != true){
-        //             this.selectAll=false;
-        //         }else if(i.value == true){
-        //             this.selectAll = true;
-        //                 console.log(i.value)
-        //         }
-                
-        //     })
-        // },
         toggleCheck(){
             console.log(this.checkboxList)
             console.log(this.list)
@@ -145,7 +127,6 @@ export default {
             this.addList(item2)
         },
         lessCount(item){
-            // var newlist = Object.assign({},ele);
             var item2 = Object.assign({}, item, { count: 1 })
             this.lessCount(item2)
         },
@@ -247,6 +228,10 @@ export default {
                         position: absolute;
                         left: 6px;
                         top: 20px;
+                        .photo{
+                            width: 76px;
+                            height: 76px;
+                        }
                         .circle{
                             display: inline-block;
                             width: 17px;

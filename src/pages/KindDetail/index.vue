@@ -2,12 +2,16 @@
     <div class="kind-detail">
         <div class="kind-content">
             <detail-header></detail-header>
-            <detail-content :list="list"></detail-content>
+            <detail-content 
+            :list="list" 
+            :mykindlist='mykindlist'
+            :test="test"></detail-content>
         </div>
         <router-view></router-view>
     </div>
 </template>
 <script>
+    import kindApi from '@/api/mykind'
     import DetailHeader from './components/DetailHeader'
     import DetailContent from './components/DetailContent'
     import XpNav from '@/components/nav'
@@ -20,23 +24,24 @@
         },
         data(){
             return {
+                mykindlist:[],
                 list:[],
+                test:[{a:'a'}]
             }
         },
         created(){
-            axios.get('https://www.easy-mock.com/mock/5b6168530f34b755cbc58b18/mock/api/goods/list',{
-                params:{
-                    id:this.$route.params.id
-                }
-            })
+            kindApi.getGoodsList(this.$route.params.id)
             //.then是发送get请求之后需要做的事,get请求发送成功之后,返回的res结果
             .then(res=>{
-                console.log(res)
-                //将mock模拟的数据赋给res,然后将res中的goodsList赋给list,
                 //将父类绑定的list的值传给子类,然后在子类中props中接收
-                this.list = res.data.data.goodsList
-                console.log(this.list)
+                this.mykindlist = res.data.data.list;
+                // for(let i = 0;i<this.mykindlist.length;i++){
+                //     this.list.push(this.mykindlist[i].goods)
+                // }
+                console.log('=======')
+                console.log(this.mykindlist)
             })
+
         }
     }
 </script>

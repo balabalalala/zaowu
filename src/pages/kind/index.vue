@@ -2,22 +2,19 @@
     <div class="kind">
         <xp-header :isSearch='false' class="kheader"></xp-header>
         <xp-group :kindList="kindList"></xp-group>
-        <!--<hr>
-        <goods-one v-for="typeObj in typeObjs" :key="typeObj.name" :typeObj="typeObj"></goods-one>-->
         <router-view></router-view>
     </div>
 </template>
 <script>
     import XpHeader from '@/components/header'
     import XpGroup from './components/group'
+    import kindApi from '@/api/mykind'
     import axios from 'axios'
-    // import GoodsOne from './components/goodsOne'
     export default {
         name: 'Type',
         components: {
             XpHeader,
             XpGroup
-            // GoodsOne
         },
         data(){
             return {
@@ -25,15 +22,10 @@
             }
         },
         created(){
-            axios.get('bufanapi/api/admin/kind/list',{
-                params:{
-                    
-                }
-            })
+            kindApi.getKindList()
             .then(res=>{
                 console.log(res)
                 this.kindList = res.data.data
-
             })
         }
     }

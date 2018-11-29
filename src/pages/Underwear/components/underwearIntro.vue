@@ -1,23 +1,23 @@
 <template>
   <div class="underwear-intro">
       <div class="intro-content">
-          <div class="intro-msg">
-            <p class="ename">{{goodsDetail.board}}</p>
-            <p class="cname">女士吊带性感睡衣</p>
-            <p class="price">¥{{goodsDetail.price}}</p>
+          <div class="intro-msg" >
+            <p class="ename" >{{goods.brandId}}</p>
+            <p class="ename" >{{goods.name}}</p>
+            <p class="ename" >￥{{goods.priceOut}}</p>
           </div>
       </div>
   </div>
 </template>
 <script>
+import kindApi from '@/api/mykind'
 export default {
-  props: {
-        goodsDetail: {
-            type:Object
+    props:['goods'],
+    data(){
+        return{
         }
     },
     created(){
-        // console.log(this.goodsDetail)
     }
 }
 </script>
@@ -38,17 +38,12 @@ export default {
                 position: absolute;
                 left: 64px;
                 top:250px;
-                /* top: 50%;
-                transform: translateY(-130%); */
                 width: 250px;
                 height: 100px;
                 font-size: 20px;
                 color: #FFFFFF;
                 text-align: center;
                 line-height: 28px;
-                .price{
-                    font-size: 24px;
-                }
             }
         }
     }

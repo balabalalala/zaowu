@@ -2,7 +2,7 @@
     <div class="underwear-evaluate">
         <div class="evaluate-detail">
         <ul class="group">
-            <li class="item" v-for="(item,index) of appraise" :key='item.id'>
+            <li class="item" v-for="(item,index) of appraise" :key='index'>
                 <img :src="item.Avatar" alt="sorry" class="header">
                 <div class="item-intro">
                     <p class="name">{{item.name}}</p>

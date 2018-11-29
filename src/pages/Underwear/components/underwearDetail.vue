@@ -4,22 +4,18 @@
             <span class="detail">详情</span>
             <span class="evaluate">评价</span>
         </div>
-        <!--<img src="@/assets/kind/bigImg.png" alt="sorry" class="big">-->
         <div class="product-msg">
-            <p class="etitle">NEIWAI</p>
-            <p class="cname">Cozy女士家居系列</p>
-            <p class="intro">舒适居家 安心睡眠 </p>
+            <p class="cname">{{goods.brandId}}</p>
+            <p class="ename">舒适居家 安心睡眠 </p>
             <p class="line"></p>
-            <p class="intro">7PM至7AM有TA陪伴你</p>
-            <p class="intro">一次下厨 一部沙发电影 </p>
-            <p class="intro">一个赖床3分钟的清晨 </p>
-            <p class="intro">不必紧绷神经不用束缚身体 </p>
+            <p class="intro" v-html="goods.content">{{goods.content}}</p>
         </div>
         <img src="@/assets/kind/big.png" alt="sorry" class="big">
     </div>
 </template>
 <script>
 export default {
+    props:['goods'],
     data(){
         return{
             showTitle:false,
@@ -34,21 +30,21 @@ export default {
             var detail = document.getElementsByClassName('detail')[0];
             var evaluate = document.getElementsByClassName('evaluate')[0];
             // console.log(top)
-            if (top > 520) {
-                let opacity = top /520 ;
+            if (top > 570) {
+                let opacity = top /570 ;
                 this.opacityStyle = { opacity };
                 this.showTitle = true;
             } else {
                 this.showTitle = false
             };
             // console.log(ass)
-            if (top > 520 && top < 1250) {
+            if (top > 570 && top < 1265) {
                 detail.style.color = '#1C4B47'
                 evaluate.style.color = '#999999';
             } else {
                 detail.style.color = '#999999'
             }
-            if (top > 1250) {
+            if (top > 1265) {
                 evaluate.style.color = '#1C4B47';
             }
         }
@@ -107,6 +103,11 @@ export default {
             .cname{
                 font-size: 16px;
                 color: #010E0D;
+            }
+            .ename{
+                font-size: 10px;
+                color: #494949;
+                letter-spacing: 6.8px;
             }
             .line{
                 width: 109px;
